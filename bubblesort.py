@@ -20,4 +20,4 @@ while(True):
 
 
 bubblesort(mass)
-print mass   
+print mass

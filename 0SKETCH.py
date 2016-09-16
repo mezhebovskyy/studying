@@ -1,10 +1,11 @@
-#!/usr/local/bin/python
-from sys import argv
+def annuity(interest,amount,months):
+    annuitypayment = amount*(interest/(1-(1+interest)**(1-months)))
+    totalpayment = annuitypayment * months
+    print totalpayment
 
-script, first, second, third = argv
+interest = 0.01
+amount = int(raw_input("What credit amount do you want to borrow?: "))
+timeborr = int(raw_input("On what term (months) do you want to borrow?: "))
 
-print raw_input("The script is called:"), script
-print raw_input("trying to count seconds"), second
-print "Your second variable is:", first
-print "Your third variable is:", third
+annuity(interest,amount,timeborr)
 
