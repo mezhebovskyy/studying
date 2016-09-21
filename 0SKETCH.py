@@ -1,11 +1,8 @@
-def annuity(interest,amount,months):
-    annuitypayment = amount*(interest/(1-(1+interest)**(1-months)))
-    totalpayment = annuitypayment * months
-    print totalpayment
+f = open("test.txt")
+content = f.read()
+f.close()
 
-interest = 0.01
-amount = int(raw_input("What credit amount do you want to borrow?: "))
-timeborr = int(raw_input("On what term (months) do you want to borrow?: "))
+words = content.split()
+print "There are %s words in the file." % format(len(words))
 
-annuity(interest,amount,timeborr)
 
