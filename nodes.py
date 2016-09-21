@@ -19,13 +19,13 @@ class List:
     
     def printList(self):
         temp = self.head
-        while temp.next != None:
+        while temp != None:
             print temp.value
             temp = temp.next
 
     def checkifinlist(self, number):
         if self.head == None:
-            return False
+            return
 
         temp = self.head
         while temp.next != None:
@@ -39,17 +39,48 @@ class List:
         if self.head == None:
             return False
         
+        temp = self.head
         index = -1
+
         while temp.next != None:
-            if temp.value != numtofind:
-                index = index + 1
+            index = index + 1
             if temp.value == number:
-                print "It has a %s index." % index
-        
-        return index = -1
-        
+                return index
+            temp = temp.next
+        return -1
 
+    def insert(self, i, number):
+        if self.head == None:
+            return
+        temp = self.head
+        node = Node(number)
+        index = -1
+          
+        while temp != None:
+            #if i == 0:
+                #temp = node.next
+                #node = temp
+            index = index + 1
+            if index == i-1 :
+                node.next = temp.next
+                temp.next = node
+                return
+            temp = temp.next
 
+    def remove(self, i):
+        if self.head == None:
+            return
+        if i == 0:
+            self.head = self.head.next
+            return
+        index = -1
+        temp = self.head
+        while temp != None:
+            index = index + 1
+            if index == i-1:
+                temp.next = temp.next.next
+                return
+            temp = temp.next
 linkedList = List()
 while True:
     num = raw_input("Please enter the number: ")
@@ -58,13 +89,17 @@ while True:
     linkedList.append(int(num))
 
 
-numtofind = raw_input("What number do you want to find?: ")
-#как обратиться к методу indexof отсюда?
+#numtoinsert = raw_input("What number do you want to insert?: ")
+#indexofnumber = raw_input("On what index do you want to insert a number?: ")
+#linkedList.insert(int(indexofnumber), int(numtoinsert))
+#linkedList.printList()
 
-
-
+#numtofind = raw_input("What number do you want to find?: ")
+#print linkedList.indexof(int(numtofind))
 
 #num = raw_input("What number do you want to check?: ")
-#print linkedList.checkifinlist(int(num)) 
-        
-    
+#print linkedList.checkifinlist(int(num))
+
+indtoremove = raw_input("What index in the list do you want to remove?: ")
+linkedList.remove(int(indtoremove))
+linkedList.printList()
