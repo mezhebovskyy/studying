@@ -28,7 +28,7 @@ class List:
             return
 
         temp = self.head
-        while temp.next != None:
+        while temp != None:
             if temp.value == number:
                 return True
                 
@@ -42,12 +42,12 @@ class List:
         temp = self.head
         index = -1
 
-        while temp.next != None:
+        while temp != None:
             index = index + 1
             if temp.value == number:
                 return index
             temp = temp.next
-        return -1
+        return False
 
     def insert(self, i, number):
         if self.head == None:
@@ -81,6 +81,7 @@ class List:
                 temp.next = temp.next.next
                 return
             temp = temp.next
+
 linkedList = List()
 while True:
     num = raw_input("Please enter the number: ")
@@ -100,6 +101,6 @@ while True:
 #num = raw_input("What number do you want to check?: ")
 #print linkedList.checkifinlist(int(num))
 
-indtoremove = raw_input("What index in the list do you want to remove?: ")
-linkedList.remove(int(indtoremove))
-linkedList.printList()
+#indtoremove = raw_input("What index in the list do you want to remove?: ")
+#linkedList.remove(int(indtoremove))
+#linkedList.printList()
