@@ -5,17 +5,18 @@ def main():
     while True:
         sentence = raw_input("Make us happy with your new thoughts using Twitter: ")
         if sentence == ".":
-            break 
-        elif len(sentence) > tweetLength:
-            print "\n\t\t\t\tSorry!:(\n\nA tweet should be less or equal %s symbols. At now you have %s symbols.\n" % (tweetLength, len(sentence))
-            continue
-        savetofile(sentence)
-        
+            break
+        if len(sentence) <= tweetLength:
+            savetofile(sentence)
+        if len(sentence) > tweetLength:
+            tweetmass = [sentence[i:i+tweetLength] for i in range(0, len(sentence), tweetLength)]
+            for i in tweetmass:
+                savetofile(i)
 
-def savetofile(sentence):
-    print "Now saving to file %r" % fileName
+def savetofile(lines):
+    print "Now saving to file %r..." % fileName
     f = open(fileName, 'a')
-    f.write(sentence + '\n')
+    f.write(lines + '\n\n')
     f.close
 
 
