@@ -2,6 +2,7 @@ tweetLength = 10
 fileName = "tweetspile.txt"
 
 def main():
+    displayTweets()
     while True:
         sentence = raw_input("Make us happy with your new thoughts using Twitter: ")
         if sentence == ".":
@@ -19,7 +20,16 @@ def savetofile(lines):
     f.write(lines + '\n\n')
     f.close
 
+def displayTweets():
+    f = open(fileName, "r")
+    fileContent = f.read()
+    tweets = fileContent.split("\n\n")
+    for tweet in tweets:
+        if len(tweet) == 0:
+             break
+        index = tweets.index(tweet) + 1
+        print "tweet %s: " % index + tweet
+    f.close
 
 if __name__== "__main__":
     main()
-
