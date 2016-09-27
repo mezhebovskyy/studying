@@ -21,18 +21,20 @@ class Tree:
         else:
             temp_node = self.root
             while True:
-                if int(new_node.mashina.hp) < int(temp_node.mashina.hp):
+                if int(new_node.data.hp) < int(temp_node.data.hp):
                     if temp_node.left == None:
-                        new_node = temp_node.left
+                        print "inserting to the left"
+                        temp_node.left = new_node 
+                        break
                     if temp_node.left != None:
                         temp_node = temp_node.left
-                    new_node = temp_node.left
-                if int(new_node.mashina.hp) >= int(temp_node.mashina.hp):
+                if int(new_node.data.hp) >= int(temp_node.data.hp):
                     if temp_node.right == None:
-                        new_node = temp_node.right
+                        print "inserting to the right"
+                        temp_node.right = new_node
+                        break
                     if temp_node.right != None:
                         temp_node = temp_node.right
-                    new_node = temp_node.right
 
     def delete(self, x, y):
         temp_node = self.root
