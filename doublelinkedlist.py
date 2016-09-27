@@ -64,8 +64,8 @@ class List:
                 #node = temp
             index = index + 1
             if index == i-1:
-                temp.next = new_node
                 new_node.next = temp.next
+                temp.next = new_node
                 new_node.prev = temp
                 return
             temp = temp.next
@@ -80,9 +80,12 @@ class List:
         temp = self.head
         while temp != None:
             index = index + 1
+            if temp.next.next == None:
+                temp.next.next == temp.next
+                temp.next.previous = temp
             if index == i-1:
                 temp.next = temp.next.next
-                temp.next.next.previous = temp
+                temp.next.previous = temp
                 return
             temp = temp.next
 
@@ -95,10 +98,10 @@ while True:
 
 
 
-#numtoinsert = raw_input("What number do you want to insert?: ")
-#indexofnumber = raw_input("On what index do you want to insert a number?: ")
-#linkedList.insert(int(indexofnumber), int(numtoinsert))
-#linkedList.printList()
+# numtoinsert = raw_input("What number do you want to insert?: ")
+# indexofnumber = raw_input("On what index do you want to insert a number?: ")
+# linkedList.insert(int(indexofnumber), int(numtoinsert))
+# linkedList.printList()
 
 #numtofind = raw_input("What number do you want to find?: ")
 #print linkedList.indexof(int(numtofind))
@@ -106,6 +109,6 @@ while True:
 #num = raw_input("What number do you want to check?: ")
 #print linkedList.checkifinlist(int(num))
 
-#indtoremove = raw_input("What index in the list do you want to remove?: ")
-#linkedList.remove(int(indtoremove))
-#linkedList.printList()
+indtoremove = raw_input("What index in the list do you want to remove?: ")
+linkedList.remove(int(indtoremove))
+linkedList.printList()
