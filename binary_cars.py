@@ -14,8 +14,8 @@ class Tree:
     def __init__(self):
         self.root = None
 
-    def insert(self, mashina):
-        new_node = Node(mashina)
+    def insert(self, data):
+        new_node = Node(data)
         if self.root == None:
             self.root = new_node 
         else:
@@ -36,71 +36,67 @@ class Tree:
                     if temp_node.right != None:
                         temp_node = temp_node.right
 
-    def delete(self, x, y):
+    def delete(self, hp, model):
+        return self.delete_rec(self.root, hp, model)
+
+    def delete_rec(self, root, hp, model):
+        if root == None:
+            return None
+        if hp < root.data.hp:
+            root.left = self.delete_rec(root.left, hp, model)
+        elif hp > root.data.hp:
+            root.right = self.delete_rec(root.right, hp, model)
+        elif root.left != None and root.right != None:
+            root.data = self.minimum(root.right).data
+            root.right = self.delete_rec(root.right, root.data.hp, root.data.mod)
+        else:
+            if root.left != None: 
+                root = root.left
+            else:
+                root = root.right
+        return root
+
+    def minimum(self, root):
+        if root.left == None:
+            return root
+        return self.minimum(root.left)
+
+
+    def find(self, hp, model):
         temp_node = self.root
-        if temp_node.car.hp == x:
-            if temp_node.car.mod == y:
-                temp_node.left == temp.node
-        else:        
-            if temp_node.left.car.hp == x:
-                if temp_node.left.car.mod == y:
+        while True:
+            if temp_node.data.hp == hp and temp_node.data.mod == model:
+                print True
+                break
+            if int(hp) < int(temp_node.data.hp):
+                if temp_node.left != None:
                     temp_node = temp_node.left
                 else:
-                    return
-            if temp_node.right.car.hp == x:
-                if temp_node.right.car.mod == y:
+                    print False
+                    break
+            elif int(hp) > int(temp_node.data.hp):
+                if temp_node.right != None:
                     temp_node = temp_node.right
                 else:
-                    return
-            else: 
-                if int(x) < int(temp_node.right.car.hp):
-                    if temp_node.left != None:
-                        temp_node = temp_node.left
-                    else:
-                        return False
-                if int(x) > int(temp_node.right.car.hp):
-                    if temp_node.left != None:
-                        temp_node = temp_node.right
-                    else:
-                        return False
-
-    def find(self, x, y):
-        temp_node = self.root
-        if temp_node.car.hp == x:
-            if temp_node.car.mod == y:
-                return True
-            return
-        else:        
-            if temp_node.left.car.hp == x:
-                if temp_node.left.car.mod == y:
-                    return True
-                else:
-                    return
-            if temp_node.right.car.hp == x:
-                if temp_node.right.car.mod == y:
-                    return True
-                else:
-                    return
-            else: 
-                if int(x) < int(temp_node.right.car.hp):
-                    if temp_node.left != None:
-                        temp_node = temp_node.left
-                    else:
-                        return False
-                if int(x) > int(temp_node.right.car.hp):
-                    if temp_node.left != None:
-                        temp_node = temp_node.right
-                    else:
-                        return False
+                    print False
+                    break
+            else:
+                print False
+                break
 
 
 
 
 database = Tree()
 database.insert(Car(125, "jetta"))
+database.insert(Car(119, "jetta1"))
+database.insert(Car(111, "jetta2"))
+database.insert(Car(150, "jetta3"))
+database.insert(Car(145, "jetta4"))
+database.insert(Car(155, "jetta5"))
+database.insert(Car(152, "jetta6"))
+database.insert(Car(153, "jetta7"))
 
-database = Tree()
-database.delete(Car(125, "jetta"))
+#database.delete(150, "jetta3")
 
-database = Tree()
-database.find(Car(125, "jetta"))
+database.find(160, "jetta5")
