@@ -6,6 +6,7 @@ class CopyMaker:
         for file in files:
             if os.path.isfile(file):
                 shutil.copy(file, pathto)
+                print "Files successfully copied. Well done, my friend!"
         
 fromwhere = raw_input("Type path to the folder from where you want to copy files: ")
 towhere = raw_input("Type path to the folder where you want to put copied files: ")

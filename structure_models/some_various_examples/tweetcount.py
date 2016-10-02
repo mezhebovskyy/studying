@@ -18,7 +18,7 @@ def savetofile(lines):
     print "Now saving to file %r..." % fileName
     f = open(fileName, 'a')
     f.write(lines + '\n\n')
-    f.close
+    f.close()
 
 def displayTweets():
     f = open(fileName, "r")
@@ -29,7 +29,7 @@ def displayTweets():
              break
         index = tweets.index(tweet) + 1
         print "tweet %s: " % index + tweet
-    f.close
+    f.close()
 
 if __name__== "__main__":
     main()

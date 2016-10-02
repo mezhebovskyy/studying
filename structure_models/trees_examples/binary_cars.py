@@ -1,3 +1,4 @@
+filename = "carmodels.txt"
 
 class Car:
     def __init__(self, hp, mod):
@@ -13,18 +14,18 @@ class Node:
 class Tree:
     def __init__(self):
         self.root = None
-
+    
     def insert(self, data):
         new_node = Node(data)
         if self.root == None:
-            self.root = new_node 
+            self.root = new_node
         else:
             temp_node = self.root
             while True:
                 if int(new_node.data.hp) < int(temp_node.data.hp):
                     if temp_node.left == None:
                         print "inserting to the left"
-                        temp_node.left = new_node 
+                        temp_node.left = new_node
                         break
                     if temp_node.left != None:
                         temp_node = temp_node.left
@@ -99,4 +100,4 @@ database.insert(Car(153, "jetta7"))
 
 #database.delete(150, "jetta3")
 
-database.find(160, "jetta5")
+#database.find(160, "jetta5")
