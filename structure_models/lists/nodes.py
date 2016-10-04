@@ -90,17 +90,17 @@ while True:
     linkedList.append(int(num))
 
 
-#numtoinsert = raw_input("What number do you want to insert?: ")
-#indexofnumber = raw_input("On what index do you want to insert a number?: ")
-#linkedList.insert(int(indexofnumber), int(numtoinsert))
-#linkedList.printList()
+# numtoinsert = raw_input("What number do you want to insert?: ")
+# indexofnumber = raw_input("On what index do you want to insert a number?: ")
+# linkedList.insert(int(indexofnumber), int(numtoinsert))
+# linkedList.printList()
 
-#numtofind = raw_input("What number do you want to find?: ")
-#print linkedList.indexof(int(numtofind))
+# numtofind = raw_input("What number do you want to find?: ")
+# print linkedList.indexof(int(numtofind))
 
-#num = raw_input("What number do you want to check?: ")
-#print linkedList.checkifinlist(int(num))
+# num = raw_input("What number do you want to check?: ")
+# print linkedList.checkifinlist(int(num))
 
-#indtoremove = raw_input("What index in the list do you want to remove?: ")
-#linkedList.remove(int(indtoremove))
-#linkedList.printList()
+# indtoremove = raw_input("What index in the list do you want to remove?: ")
+# linkedList.remove(int(indtoremove))
+# linkedList.printList()
