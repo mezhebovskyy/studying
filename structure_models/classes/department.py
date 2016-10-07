@@ -14,10 +14,10 @@ class Department:
         self.name = name
         self.employees = []
 
-    def fill_employees(self, all_employees):
-        for employee in all_employees:
-            if employee.dep_code == self.code:
-                self.employees.append(employee)
+    def loadEmployees(self):
+        reader = EmployeeReader()
+        self.employees = reader.ReadFromFile(employeeFileName, self.code)
+
     def show_my_employees(self):
         print "I'm the department of %s." % self.name
         print "Here are my employees:"
@@ -25,44 +25,37 @@ class Department:
             print "%s\t%s\tof age:%s" %(empl.emp_code, empl.name, empl.age)
 
 class EmployeeReader:
-    def __init__(self, filename):
-        self.filename = filename
-        self.employees = []
-        
-    def ReadFromFile(self):
-        p = open(self.filename, "r")
-        for line in p:
+    def ReadFromFile(self, fileName, departmentCode):
+        array = []
+        f = open(fileName, "r")
+        for line in f:
             line = line.replace('\n','')
             code, name, age, dep = line.split(",")
-            self.employees.append(Employee(code, name, age, dep))
-        p.close()
-        return self.employees
+            if departmentCode == dep:
+                array.append(Employee(code, name, age, dep))
+        f.close()
+        return array
 
 class DepartmentReader:
-    def __init__(self, filename):
-        self.filename = filename
-        self.departments = []
-        
-    def ReadFromFile(self):
-        d = open(self.filename, "r")
-        for line in d:
+    def ReadFromFile(self, fileName):
+        array = []
+        f = open(fileName, "r")
+        for line in f:
             line = line.replace('\n','')
             code, name = line.split(",")
-            self.departments.append(Department(code, name))
-        d.close()
-        return self.departments
+            array.append(Department(code, name))
+        f.close()
+        return array
 
 
 def main():
-    #Create readers
-    employeeReader = EmployeeReader(employeeFileName)
-    departmentReader = DepartmentReader(departmentFileName)
-    #read data
-    employees = employeeReader.ReadFromFile()
-    departments = departmentReader.ReadFromFile()
-    #Define the connection 
+    departmentReader = DepartmentReader()
+    departments = departmentReader.ReadFromFile(departmentFileName)
+    
     for dep in departments:
-        dep.fill_employees(employees)
+        dep.loadEmployees()
+
+    for dep in departments:
         dep.show_my_employees()
 
 if __name__ == "__main__":
