@@ -1,23 +1,69 @@
+from Models import Hotel
+from Room import RoomService
+# from Order import OrderService
 
-print("\nWelcome to the nature center. What would you like to do?")
-choice = ''
-while choice != 'q':
-    print("\n[1] Enter 1 to take a bicycle ride.")
-    print("[2] Enter 2 to go for a run.")
-    print("[3] Enter 3 to climb a mountain.")
-    print("[q] Enter q to quit.")
-    
-    choice = raw_input("\nWhat would you like to do? ")
-    
-    if choice == '1':
-        print("\nHere's a bicycle. Have fun!\n")
-    elif choice == '2':
-        print("\nHere are some running shoes. Run fast!\n")
-    elif choice == '3':
-        print("\nHere's a map. Can you leave a trip plan for us?\n")
-    elif choice == 'q':
-        print("\nThanks for playing. See you later.\n")
-    else:
-        print("\nI don't understand that choice, please try again.\n")
+hotelFileName = "fileHotels.csv"
 
-print("Thanks again, bye now.")
+class HotelService:
+    def __init__(self):
+        self.listofhotels = []
+        self.roomservice = RoomService()
+    
+    def loadhotels(self):
+        reader = HotelReader()
+        self.listofhotels = reader.readfromfile(hotelFileName)
+        for hotel in self.listofhotels:
+            hotel.rooms = self.roomservice.loadRoomsForHotel(hotel.id)
+
+    def addhotel(self, name, isavaliable):
+        ID = len(self.listofhotels) + 1
+        hotel = Hotel(ID, name, isavaliable)
+        self.listofhotels.append(hotel)
+
+    def deletehotel(self, hotelid):
+        for hotel in self.listofhotels:
+            if hotel.id == hotelid:
+                self.listofhotels.remove(hotel)
+
+    def showhotels(self, status):
+        if status:
+            title = "avaliable"
+        else:
+            title = "not avaliable"
+        print "Here is the list of %s hotels: " % title
+        for item in self.listofhotels:
+            if item.isavaliable == status:
+                print "Hotel name is %s. Hotel ID - %s." % (item.name, item.id)
+    
+    def edithotel(self, act, hotelID, newname, newstatus):
+        for hotel in self.listofhotels:
+            if hotelID == hotel.id:
+                if act == "name":
+                    hotel.name = newname
+                if act == "status":
+                    hotel.isavaliable = newstatus
+
+    def savehotel(self):
+        open(hotelFileName, "w").close()
+        f = open(hotelFileName, "a")
+        for hotel in self.listofhotels:
+            linetoadd = "%s,%s,%s\n" % (hotel.id, hotel.name, hotel.isavaliable)
+            f.write(linetoadd)
+        f.flush()
+        f.close()
+
+class HotelReader:
+    def readfromfile(self, fileName):
+        array = []
+        f = open(fileName, "r")
+        for line in f:
+            line = line.replace('\n','')
+            id, name, status = line.split(",")
+            array.append(Hotel(id, name, status))
+        f.close()
+        return array
+
+
+
+
+

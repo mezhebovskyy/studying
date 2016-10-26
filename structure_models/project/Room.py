@@ -1,38 +1,54 @@
 from Models import Room
-from Hotel import HotelService
+from Hotel import *
+
+roomFileName = "fileRooms.csv"
+
 
 class RoomService:
     def __init__(self):
         self.listofrooms = []
 
-    def addRoom(self):
-        array = self.listofrooms
-        while True:
-            new_room = raw_input("Do you want to add a room?(y/n): ")
-            if new_room == "n":
-                break
-            if new_room == "y":
-                continue
-            ID = len(array) + 1
-            hotelID = HotelService().hotelid
-            number = raw_input("Type the number of Room: ")
-            beds = raw_input("Type the number of beds in Room %s: ") % number
-            price = raw_input("Type the price of stay per person: ")
-            is_avaliable = True
-            self.listofrooms.append(Room(ID, hotelID, number, beds, price, is_avaliable))
-            print "Room №%s is successfuly added to Hotel %s." % (number, hotelID)
-            
-    def editroom(self, roomID):
+    def addRoom(self, hotelID, number, beds, price, isavaliable):
+        ID = len(self.listofrooms) + 1
+        self.listofrooms.append(Room(ID, hotelid, number, beds, price, isavaliable))
+        print "New room successfully added."
+        
+    def loadRoomsForHotel(self, hotelid):
+        roomreader = RoomReader()
+        rooms = roomreader.readfromfile(roomFileName, hotelid)
+        return rooms
+
+    # def editroom(self, roomID):
 
 
 
-    def showrooms(self, from, till, hotelID):
+    # def showrooms(self, from, till, hotelID):
 
-        # after all this array contains 
-        array = [self.hotelID, self.roomID, ...]
-        print array
+    #     # after all this array contains 
+    #     array = [self.hotelID, self.roomID, ...]
+    #     print array
+
+    def saveroom(self):
+        open(roomFileName, "w").close()
+        f = open(roomFileName, "a")
+        for room in self.listofrooms:
+            linetoadd = "%s,%s,%s,%s,%s\n" % (room.id, room.hotelID, room.number, room.beds, room.price, room.isavaliable)
+            f.write(linetoadd)
+        f.flush()
+        f.close()
 
 
+class RoomReader:
+    def readfromfile(self, fileName, hotelid):
+        array = []
+        f = open(fileName, "r")
+        for line in f:
+            line = line.replace('\n','')
+            id, hotelID, number, beds, price, isavaliable = line.split(",")
+            if hotelID == hotelid:
+                array.append(Room(id, hotelID, number, beds, price, isavaliable))
+        f.close()
+        return array
 
 
     
