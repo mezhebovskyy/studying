@@ -5,20 +5,20 @@ roomFileName = "fileRooms.csv"
 
 
 class RoomService:
-    def __init__(self):
-        self.listofrooms = []
+    # def __init__(self):
+    #     self.listofrooms = []
 
-    def addRoom(self, hotelID, number, beds, price, isavaliable):
+    def addRoom(self, hotel, number, beds, price, isavaliable):
         ID = len(self.listofrooms) + 1
-        self.listofrooms.append(Room(ID, hotelid, number, beds, price, isavaliable))
-        print "New room successfully added."
-        
+        hotelid = hotel.id
+        hotel.rooms.append(Room(ID, hotelid, number, beds, price, isavaliable))
+
     def loadRoomsForHotel(self, hotelid):
         roomreader = RoomReader()
         rooms = roomreader.readfromfile(roomFileName, hotelid)
-        return rooms
+        return rooms 
 
-    # def editroom(self, roomID):
+    # def editroom(self, room):
 
 
 

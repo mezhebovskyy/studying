@@ -1,6 +1,6 @@
-from Room import RoomService
-from Hotel import HotelService
-from Models import Order
+from Room import *
+from Hotel import *
+from Models import *
 
 
 class OrderService:

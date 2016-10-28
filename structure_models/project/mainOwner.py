@@ -58,27 +58,8 @@ def main():
         
         elif choice == "2":
             while True:
-                hotelID = raw_input("Type index of the hotel where you want to add a room: ")
-                number = raw_input("Type the number of Room: ")
-                beds = raw_input("Type the number of beds in Room %s: ") % number
-                price = raw_input("Type the price of stay per person: ")
-                isavaliable = True
-                RoomService().addRoom(hotelID, number, beds, price, isavaliable)
-                new_room = raw_input("Do you want to add another room?(y/n): ")
-                if new_room == "n":
-                    break
-        
-        elif choice == "3":
-            while True:
-                hotelID = raw_input("Type ID of hotel you want to delete: ")
-                bunchofhotels.deletehotel(hotelID)
-                choice = raw_input("Do you want to remove one more hotel?(y/n): ")
-                if choice == "n":
-                    break
-        # elif choice == "4":
-
-        elif choice == "5":
-            while True:
+                hotels = bunchofhotels.getAllHotels()
+                HotelPrinter().showAllHotels(hotels)
                 hotelID = raw_input("Type ID of hotel you want to edit: ")
                 act = raw_input("What do you want to edit in your Hotel (name/status)?: ")
                 if act == "name":
@@ -92,23 +73,47 @@ def main():
                 newedit = raw_input("Do you want another changes in your hotels?(y/n): ")
                 if newedit == "n":
                     break
+        
+        elif choice == "3":
+            while True:
+                hotelID = raw_input("Type ID of hotel you want to delete: ")
+                bunchofhotels.deletehotel(hotelID)
+                choice = raw_input("Do you want to remove one more hotel?(y/n): ")
+                if choice == "n":
+                    break
 
+        elif choice == "4":
+            while True:
+                hotelID = raw_input("Type ID of the hotel where you want to add a room: ")
+                hotel = bunchofhotels.getHotelByID(hotelID)
+                number = raw_input("Type the number of room: ")
+                beds = raw_input("Type the number of beds in room: ")
+                price = raw_input("Type the price of stay per person: ")
+                isavaliable = True
+                RoomService().addRoom(hotel, number, beds, price, isavaliable)
+                new_room = raw_input("Do you want to add another room?(y/n): ")
+                if new_room == "n":
+                    break
+
+        elif choice == "5":
+            while True:
+                hotelId = raw_input("Type ID of the hotel where you want to edit room: ")
+                hotel = bunchofhotels.getHotelByID(hotelID)
+                number = raw_input("Type the number of room you want to edit: ")
+                newnumber = raw_input("Type new room number (otherwise type None): ")
+                newbeds = raw_input("Type new number of beds in the room (otherwise type None): ")
+                newprice = raw_input("Type new price (otherwise type None): ")
+                newstatus = raw_input("Print new status (otherwise type None): ")
+                
         # elif choice == "6":
 
-
         elif choice == "9":
-            bunchofhotels.savehotel()
-            print "Hotels are saved to a file."
-
-        # elif choice == "9":
-        #     bunchofhotels.savehotel()
-        #     print "Hotels are saved to a file."
+            hotels = bunchofhotels.getAllHotels()
+            HotelReader().savehotel(hotels)
 
         elif choice == "q":
-            print("Thanks again, bye now.")
+            print("Bye!")
             break
-
-        
 
         else:
             print("\nI don't understand that choice, please try again.\n")
