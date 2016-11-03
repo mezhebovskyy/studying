@@ -1,3 +1,4 @@
+import uuid
 from Models import Hotel
 from Room import *
 # from Order import OrderService
@@ -11,11 +12,16 @@ class HotelService:
     
     def loadhotels(self):
         reader = HotelReader()
-        self.listofhotels = reader.readfromfile(hotelFileName)
+        self.listofhotels = reader.loadData(hotelFileName)
         for hotel in self.listofhotels:
             hotel.rooms = self.roomservice.loadRoomsForHotel(hotel.id)
 
-    def getHotelByID(self, hotelID):
+    def getHotel(self, hotelnumber):
+        for hotel in self.listofhotels:
+            if self.listofhotels.index(hotel) == int(hotelnumber) - 1:
+                return hotel
+
+    def getHotelById(self, hotelID):
         for hotel in self.listofhotels:
             if hotel.id == hotelID:
                 return hotel
@@ -28,41 +34,37 @@ class HotelService:
         return hotels
 
     def getAllHotels(self):
-        hotels = []
-        if len(self.listofhotels) != len(hotels):
-            for hotel in self.listofhotels:
-                hotels.append(hotel)
-        if len(self.listofhotels) == len(hotels):
-            return hotels
+        return self.listofhotels
 
     def addhotel(self, name, isavaliable):
-        ID = len(self.listofhotels) + 1
+        ID = uuid.uuid4()
         hotel = Hotel(ID, name, isavaliable)
         self.listofhotels.append(hotel)
 
-    def edithotel(self, act, hotelID, newname, newstatus):
-        for hotel in self.listofhotels:
-            if hotelID == hotel.id:
-                if act == "name":
-                    hotel.name = newname
-                if act == "status":
-                    hotel.isavaliable = newstatus
+    def editHotelName(self, hotelnumber, newname):
+        hotel = self.getHotel(hotelnumber)
+        hotel.name = newname
 
-    def deletehotel(self, hotelid):
-        for hotel in self.listofhotels:
-            if hotel.id == hotelid:
-                self.listofhotels.remove(hotel)
+    def editHotelStatus(self, hotelnumber):
+        hotel = self.getHotel(hotelnumber)
+        hotel.isavaliable = not hotel.isavaliable
+
+    def deleteHotel(self, hotelnumber):
+        hotel = self.getHotel(hotelnumber)
+        self.listofhotels.remove(hotel)
 
 class HotelPrinter:
     def showAllHotels(self, hotels):
         print "Here is the list of all hotels: "
+        index = 1
         for hotel in hotels:
-            if hotel.isavaliable == "True":
+            if hotel.isavaliable == True:
                 status = "avaliable"
-                print "Hotel name - %s. ID - %s. Status - %s." % (hotel.name, hotel.id, status)
+                print "%s) Hotel name - %s. Status - %s. ID - %s." % (index, hotel.name, status, hotel.id)
             else:
                 status = "not avaliable"
-                print "Hotel name - %s. ID - %s. Status - %s." % (hotel.name, hotel.id, status)
+                print "%s) Hotel name - %s. Status - %s. ID - %s." % (index, hotel.name, status, hotel.id)
+            index += 1
 
     def showHotelsByStatus(self, hotels, status):
         if status:
@@ -74,7 +76,7 @@ class HotelPrinter:
             print "Hotel name - %s. ID - %s." % (hotel.name, hotel.id)
 
 class HotelReader:
-    def readfromfile(self, fileName):
+    def loadData(self, fileName):
         array = []
         f = open(fileName, "r")
         for line in f:
@@ -92,7 +94,6 @@ class HotelReader:
             f.write(linetoadd)
         f.flush()
         f.close()
-
 
 
 

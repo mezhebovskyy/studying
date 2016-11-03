@@ -10,6 +10,10 @@ orderFileName = "fileOrders.csv"
 
 def main():
     bunchofhotels = HotelService()
+    room_service = RoomService()
+
+    hotel_printer = HotelPrinter()
+
     bunchofhotels.loadhotels()
 
     # bunchofrooms = RoomService()
@@ -59,57 +63,84 @@ def main():
         elif choice == "2":
             while True:
                 hotels = bunchofhotels.getAllHotels()
-                HotelPrinter().showAllHotels(hotels)
-                hotelID = raw_input("Type ID of hotel you want to edit: ")
+                hotel_printer.showAllHotels(hotels)
+                hotelnumber = raw_input("Type number of hotel you want to edit: ")
                 act = raw_input("What do you want to edit in your Hotel (name/status)?: ")
                 if act == "name":
                     newname = raw_input("Type new name of hotel: ")
-                    bunchofhotels.edithotel(act, hotelID, newname, None)
-                    print "Hotel name was successfully changed."
+                    bunchofhotels.editHotelName(hotelnumber, newname)
                 if act == "status":
-                    newstatus = raw_input("Print new status: ")
-                    bunchofhotels.edithotel(act, hotelID, None, newstatus)
-                    print "Hotel status was successfully changed."
+                    bunchofhotels.editHotelStatus(hotelnumber)
                 newedit = raw_input("Do you want another changes in your hotels?(y/n): ")
                 if newedit == "n":
                     break
         
         elif choice == "3":
             while True:
-                hotelID = raw_input("Type ID of hotel you want to delete: ")
-                bunchofhotels.deletehotel(hotelID)
+                hotels = bunchofhotels.getAllHotels()
+                hotel_printer.showAllHotels(hotels)
+                hotelnumber = raw_input("Type number of hotel you want to remove: ")
+                bunchofhotels.deleteHotel(hotelnumber)
                 choice = raw_input("Do you want to remove one more hotel?(y/n): ")
                 if choice == "n":
                     break
 
         elif choice == "4":
             while True:
-                hotelID = raw_input("Type ID of the hotel where you want to add a room: ")
-                hotel = bunchofhotels.getHotelByID(hotelID)
+                hotels = bunchofhotels.getAllHotels()
+                hotel_printer.showAllHotels(hotels)
+                hotelnumber = raw_input("Type number of hotel where you want to add a room: ")
+                hotel = bunchofhotels.getHotel(hotelnumber)
                 number = raw_input("Type the number of room: ")
                 beds = raw_input("Type the number of beds in room: ")
                 price = raw_input("Type the price of stay per person: ")
                 isavaliable = True
-                RoomService().addRoom(hotel, number, beds, price, isavaliable)
+                room_service.addRoom(hotel, number, beds, price, isavaliable)
                 new_room = raw_input("Do you want to add another room?(y/n): ")
                 if new_room == "n":
                     break
 
         elif choice == "5":
             while True:
-                hotelId = raw_input("Type ID of the hotel where you want to edit room: ")
-                hotel = bunchofhotels.getHotelByID(hotelID)
-                number = raw_input("Type the number of room you want to edit: ")
-                newnumber = raw_input("Type new room number (otherwise type None): ")
-                newbeds = raw_input("Type new number of beds in the room (otherwise type None): ")
-                newprice = raw_input("Type new price (otherwise type None): ")
-                newstatus = raw_input("Print new status (otherwise type None): ")
+                hotels = bunchofhotels.getAllHotels()
+                hotel_printer.showAllHotels(hotels)
+                hotelnumber = raw_input("Type number of hotel where you want to add a room: ")
+                hotel = bunchofhotels.getHotel(hotelnumber)
+                RoomPrinter().showRoomsByHotel(hotel)
+                roomNumber = raw_input("Choose room number: ")
+                room = room_service.getRoomByNumber(hotel, roomNumber)
+
+                newnumber = raw_input("Type new room number (otherwise type .): ")
+                newbeds = raw_input("Type new number of beds (otherwise type .): ")
+                newprice = raw_input("Type new price (otherwise type .): ")
+                newstatus = raw_input("Print new status (otherwise type .): ")
+
+                room_service.editRoom(room, newnumber, newbeds, newprice, newstatus)
+                newedit = raw_input("Do you want another changes in your rooms?(y/n): ")
+                if newedit == "n":
+                    break
                 
-        # elif choice == "6":
+        elif choice == "6":
+            while True:
+                hotels = bunchofhotels.getAllHotels()
+                hotel_printer.showAllHotels(hotels)
+                hotelnumber = raw_input("Type number of hotel where you want to remove a room: ")
+                hotel = bunchofhotels.getHotel(hotelnumber)
+                RoomPrinter().showRoomsByHotel(hotel)
+                roomNumber = raw_input("Choose room number to remove: ")
+                room_service.deleteRoom(hotel, roomNumber)
+                choice = raw_input("Do you want to remove one more room?(y/n): ")
+                if choice == "n":
+                    break
+
 
         elif choice == "9":
             hotels = bunchofhotels.getAllHotels()
             HotelReader().savehotel(hotels)
+
+        elif choice == "10":
+            hotels = bunchofhotels.getAllHotels()
+            RoomReader().saveroom(hotels)
 
         elif choice == "q":
             print("Bye!")
