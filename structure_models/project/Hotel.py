@@ -1,100 +1,128 @@
+import sqlite3 as lite
+import sys
 import uuid
 from Models import Hotel
 from Room import *
 # from Order import OrderService
 
-hotelFileName = "fileHotels.csv"
+database = "HROdata.db"
 
 class HotelService:
-    def __init__(self):
-        self.listofhotels = []
-        self.roomservice = RoomService()
-    
-    def loadhotels(self):
-        reader = HotelReader()
-        self.listofhotels = reader.loadData(hotelFileName)
-        for hotel in self.listofhotels:
-            hotel.rooms = self.roomservice.loadRoomsForHotel(hotel.id)
-
-    def getHotel(self, hotelnumber):
-        for hotel in self.listofhotels:
-            if self.listofhotels.index(hotel) == int(hotelnumber) - 1:
-                return hotel
-
     def getHotelById(self, hotelID):
-        for hotel in self.listofhotels:
-            if hotel.id == hotelID:
-                return hotel
+        hotel = None
+        conn = lite.connect(database)
+        with conn:
+            conn.row_factory = lite.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM Hotels WHERE Id='%s'" % hotelID)
+            row = cursor.fetchone()
+            hotel = Hotel(row["Id"], str(row["Name"]), str(row["Status"])=="True")
+        conn.close()
+        return hotel
 
     def getHotelsByStatus(self, status):
         hotels = []
-        for hotel in self.listofhotels:
-            if hotel.isavaliable == status:
-                hotels.append(hotel)
+        conn = lite.connect(database)
+        with conn:
+            conn.row_factory = lite.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM Hotels WHERE Status=%s" % status)
+            rows = cursor.fetchall()
+            for row in rows:
+                hotels.append(Hotel(row["Id"], str(row["Name"]), row["Status"]))
+        conn.close()
         return hotels
 
     def getAllHotels(self):
-        return self.listofhotels
+        hotels = []
+        conn = lite.connect(database)
+        with conn:
+            conn.row_factory = lite.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM Hotels")
+            rows = cursor.fetchall()
+            for row in rows:
+                hotels.append(Hotel(row["Id"], str(row["Name"]), str(row["Status"])=='True'))
+        conn.close()
+        return hotels
 
     def addhotel(self, name, isavaliable):
         ID = uuid.uuid4()
         hotel = Hotel(ID, name, isavaliable)
-        self.listofhotels.append(hotel)
+        HotelReader().saveNewHotel(hotel)
 
-    def editHotelName(self, hotelnumber, newname):
-        hotel = self.getHotel(hotelnumber)
+    def editHotelName(self, hotel, newname):
         hotel.name = newname
+        HotelReader().updateHotelName(hotel, newname)
 
-    def editHotelStatus(self, hotelnumber):
-        hotel = self.getHotel(hotelnumber)
+    def editHotelStatus(self, hotel):
         hotel.isavaliable = not hotel.isavaliable
+        HotelReader().updateHotelStatus(hotel)
 
-    def deleteHotel(self, hotelnumber):
-        hotel = self.getHotel(hotelnumber)
-        self.listofhotels.remove(hotel)
+    def deleteHotel(self, hotelId):
+        HotelReader().deleteHotelFromDB(hotelId)
+
 
 class HotelPrinter:
-    def showAllHotels(self, hotels):
+    def showAllHotels(self):
         print "Here is the list of all hotels: "
+        hotels = HotelService().getAllHotels()
         index = 1
         for hotel in hotels:
             if hotel.isavaliable == True:
-                status = "avaliable"
-                print "%s) Hotel name - %s. Status - %s. ID - %s." % (index, hotel.name, status, hotel.id)
+                print "%s) Hotel name - %s. Status - %s. ID - %s." % (index, hotel.name, "avaliable", hotel.id)
             else:
-                status = "not avaliable"
-                print "%s) Hotel name - %s. Status - %s. ID - %s." % (index, hotel.name, status, hotel.id)
+                print "%s) Hotel name - %s. Status - %s. ID - %s." % (index, hotel.name, "not avaliable", hotel.id)
             index += 1
 
-    def showHotelsByStatus(self, hotels, status):
-        if status:
-            title = "avaliable"
-        else:
-            title = "not avaliable"
-        print "Here is the list of %s hotels: " % title
-        for hotel in hotels:
-            print "Hotel name - %s. ID - %s." % (hotel.name, hotel.id)
+        def getId(number):
+            return hotels[int(number)-1].id
+        return getId
+
+    def showHotelsByStatus(self, status):
+        conn = lite.connect(database)
+        with conn:
+            conn.row_factory = lite.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * From Hotels WHERE Status=%s" % str(status))
+            rows = cursor.fetchall()
+            if status == True:
+                title = "avaliable"
+            else:
+                title = "not avaliable"
+            print "Here is the list of %s hotels: " % title
+            for row in rows:
+                print "Hotel name - %s. ID - %s." % (row["Name"], row["Id"])
 
 class HotelReader:
-    def loadData(self, fileName):
-        array = []
-        f = open(fileName, "r")
-        for line in f:
-            line = line.replace('\n','')
-            id, name, status = line.split(",")
-            array.append(Hotel(id, name, status))
-        f.close()
-        return array
+    def saveNewHotel(self, hotel):
+        conn = lite.connect(database)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO Hotels VALUES(?, ?, ?)", (str(hotel.id), hotel.name, str(hotel.isavaliable)))
+        conn.commit()
+        conn.close()
 
-    def savehotel(self, hotels):
-        open(hotelFileName, "w").close()
-        f = open(hotelFileName, "a")
-        for hotel in hotels:
-            linetoadd = "%s,%s,%s\n" % (hotel.id, hotel.name, hotel.isavaliable)
-            f.write(linetoadd)
-        f.flush()
-        f.close()
+    def updateHotelName(self, hotel, name):
+        conn = lite.connect(database)
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute("UPDATE Hotels SET Name=? WHERE Id=?", (name, str(hotel.id)))
+            conn.commit()
+        conn.close()
 
+    def updateHotelStatus(self, hotel):
+        conn = lite.connect(database)
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute("UPDATE Hotels SET Status=? WHERE Id=?", (str(hotel.isavaliable), str(hotel.id)))
+            conn.commit()
+        conn.close()
 
-
-
+    def deleteHotelFromDB(self, hotelID):
+        conn = lite.connect(database)
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM Hotels WHERE Id=?", [str(hotelID)])
+            cursor.execute("DELETE FROM Rooms WHERE HotelID=?", [str(hotelID)])
+            conn.commit()
+        conn.close()
