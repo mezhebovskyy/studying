@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Calculator</title>
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="bootstrap/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container"> 
+    <div class="col-md-6">
+      <div class="row" style="padding-top:5px;padding-bottom:5px">
+        <div class="col-md-6" id="input_section">
+          <input type="text" class="form-control" id="input">
+        </div>
+        <div class="col-md-3" style="padding-left:0px;padding-right:0px">
+          <button type="button" onclick="delAll()" class="btn btn-danger">C</button>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" onclick="selectVal(7)" class="btn btn-default col-md-3">7</button>
+        <button type="button" onclick="selectVal(8)" class="btn btn-default col-md-3">8</button>
+        <button type="button" onclick="selectVal(9)" class="btn btn-default col-md-3">9</button>
+        <button type="button" onclick="doSomething('÷')" class="btn btn-default col-md-3">÷</button>
+      </div>
+
+      <div class="row">
+        <button type="button" onclick="selectVal(4)" class="btn btn-default col-md-3">4</button>
+        <button type="button" onclick="selectVal(5)" class="btn btn-default col-md-3">5</button>
+        <button type="button" onclick="selectVal(6)" class="btn btn-default col-md-3">6</button>
+        <button type="button" onclick="doSomething('x')" class="btn btn-default col-md-3">x</button>
+      </div>
+
+      <div class="row">
+        <button type="button" onclick="selectVal(1)" class="btn btn-default col-md-3">1</button>
+        <button type="button" onclick="selectVal(2)" class="btn btn-default col-md-3">2</button>
+        <button type="button" onclick="selectVal(3)" class="btn btn-default col-md-3">3</button>
+        <button type="button" onclick="doSomething('-')" class="btn btn-default col-md-3">-</button>
+      </div>
+
+      <div class="row">
+        <button type="button" onclick="selectVal(0)" class="btn btn-default col-md-3">0</button>
+        <button type="button" onclick="selectVal('.')" class="btn btn-default col-md-3">.</button>
+        <button type="button" onclick="doSomething('+')" class="btn btn-default col-md-3">+</button>
+        <button type="button" onclick="execute()" class="btn btn-warning col-md-3">=</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="bootstrap/js/bootstrap.js"></script>
+  <script src="bootstrap/js/scripts.js"></script>
+</body>
+
+</html>
