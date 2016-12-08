@@ -1,0 +1,62 @@
+body {
+  padding-top: 50px;
+}
+
+.navbar-brand {
+  color:white !important;
+  font-family: 'Trebuchet MS';
+  text-align: center;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  background: lightskyblue; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(-125deg, darkslateblue, lightskyblue); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(-125deg, darkslateblue, lightskyblue); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(-125deg, darkslateblue, lightskyblue); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(-125deg, darkslateblue, lightskyblue); /* Standard syntax */
+}
+
+.nav
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.flex-item {
+  background:white;
+  padding: 2px;
+  width: 300px;
+  height: 300px;
+  margin-top: 10px;
+  
+  line-height: 160px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}
+
+img.demo{
+  width:100%;
+  height: 100%;
+  vertical-align: top; 
+}
+
+@media screen and (max-width: 768px){
+  .navbar {
+    margin-bottom: 0px;
+    position: fixed;
+  }
+}

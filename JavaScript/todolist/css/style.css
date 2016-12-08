@@ -1,0 +1,46 @@
+body {
+  padding-top: 25px;
+}
+
+.btn{
+    margin: 2.5px 5px 2.5px 0;
+}
+
+.row{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+div#input_section{
+  height: 60px !important;
+  width: 500px;
+  padding: 5px 5px 5px 5px !important;
+}
+
+input#input{
+  height: 50px;
+}
+
+.form-control{
+  height: 60px;
+  width: 499px;
+}
+
+section#middle {
+  padding: 60px 5px 5px 5px !important;
+}
+
+div#conMid {
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px; 
+}
+
+input#mySearch{
+  float:right;
+  height: 30px;
+  width: 200px;
+  padding: 3px 3px 3px 3px;
+  margin-bottom: 5px;
+}
