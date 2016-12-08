@@ -2,7 +2,7 @@ function refresh() {
     var elem = document.getElementById("flexCont");
     elem.innerHTML = '';
 
-    $.getJSON("https://api.oboobs.ru/noise/20/", function(data) {
+    $.getJSON("http://api.oboobs.ru/noise/20/", function(data) {
     data.forEach(function (obj) {
         var img = new Image();
         img.src = "http://media.oboobs.ru/" + obj.preview;
