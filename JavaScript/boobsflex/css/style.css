@@ -17,8 +17,6 @@ body {
   background: linear-gradient(-125deg, darkslateblue, lightskyblue); /* Standard syntax */
 }
 
-.nav
-
 .flex-container {
   padding: 0;
   margin: 0;
