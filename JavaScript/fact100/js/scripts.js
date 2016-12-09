@@ -35,4 +35,3 @@ var insert = function(){
         callCount += 1;
     }
 };
-

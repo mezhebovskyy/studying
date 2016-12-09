@@ -1,44 +1,13 @@
-def makebold(fn):
-    def wrapped():
-        return "<b>" + fn() + "</b>"
-    return wrapped
-
-def makeitalic(fn):
-    def wrapped():
-        return "<i>" + fn() + "</i>"
-    return wrapped
-
-@makebold
-@makeitalic
-def hello():
-    return "hello world"
-
-print hello()
 
 
+class Rest:
+    def getCoords(self, ip):
+        return "42,42"
 
+    def getWeather(self, coords):
+        return "42 Celsius"
 
+    def getWeatherCompbined(self, ip):
+        coords = "42,42"
+        return "42 Celsius"
 
-def bread(func):
-    def wrapper():
-        print "</------\>"
-        func()
-        print "<\______/>"
-    return wrapper
- 
-def ingredients(func):
-    def wrapper():
-        print "#помидоры#"
-        func()
-        print "~салат~"
-    return wrapper
-
-@bread
-@ingredients
-def sandwich(food="--ветчина--"):
-    print food
-
-# sandwich()
-
-# sandwich = bread(ingredients(sandwich))
-# sandwich()
