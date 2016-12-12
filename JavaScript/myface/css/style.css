@@ -38,11 +38,12 @@ section{
   width:75%;
 }
 
-img.demo{
+video#videoElement{
   width:100%;
   padding:3px;
-  border:1px solid #ccc
+  background-color: #666;
 }
+
 
 section#feature{
   background:#1caa98;
