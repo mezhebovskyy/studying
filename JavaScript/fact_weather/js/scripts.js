@@ -31,19 +31,3 @@ var insert = function(){
         console.log(item);
     });
 };
-
-
-
-$.get("http://numbersapi.com/42")
-    .then(function(response){
-        var data = {lat: 41, lng: 42 };
-        return $.get("weather.com/lat=")
-    })
-    .then(function(reps){
-    })
-    .then(function(reps){
-    })
-    .then(function(reps){
-    })
-    .then(function(reps){
-    });

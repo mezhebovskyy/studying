@@ -1,0 +1,30 @@
+body {
+  padding-top: 25px;
+}
+
+.btn{
+    border-color: #ccc;
+    height: 60px;
+    width: 60px;
+    margin: 2.5px 5px 2.5px 5px;
+}
+
+.row{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+div#input_section{
+  height: 60px !important;
+  width: 350px;
+  padding: 5px 5px 5px 5px !important;
+}
+
+.form-control{
+  height: 60px;
+}
+
+@media(min-width: 747px) and (max-width: 991px){
+  
+}
+    
