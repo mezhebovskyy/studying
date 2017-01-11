@@ -43,103 +43,28 @@
     <section id="about"> 
       <div class="container">
         <div class="row">
-          <div class="col-md-8">
-            <h2>Lorem Ipsum</h2>
-            <p>Parturient scelerisque a in malesuada sem suspendisse et facilisis venenatis vestibulum 
-            odio consectetur a sagittis in ultricies auctor convallis vestibulum enim quisque fringilla a. 
-            Id ad in parturient enim suspendisse at condimentum egestas erat lobortis suspendisse 
-            condimentum a suspendisse vel vestibulum aliquam tellus a aliquam scelerisque tellus sem a et.</p>
-            <br>
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Collapsible Group Item #1
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 
-                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. 
-                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee 
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred 
-                            nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft 
-                            beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Collapsible Group Item #2
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 
-                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. 
-                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee 
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
-                            cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat 
-                            craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Collapsible Group Item #3
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 
-                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa 
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid 
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer 
-                            labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. 
-                            Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably 
-                            haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
           <div class="col-md-4">
             <video autoplay="true" id="videoElement"></video>
-            <h2>Lorem Ipsum</h2> 
-            <p>Scelerisque nunc vestibulum est eget consequat integer adipiscing interdum a nostra 
-            ac mi potenti sociis placerat vestibulum conubia parturient.</p>
-            <a href="#" class="btn btn-default">Read More</a>
+            <div class="controls">
+                <label for="padding">Padding:</label>
+                <input type="range" name="padding" min="0" max="50" value="3" data-sizing="px">
+
+                <label for="blur">Blur:</label>
+                <input type="range" name="blur" min="0" max="25" value="0" data-sizing="px">
+
+                <label for="width">Width:</label>
+                <input type="range" name="width" min="10" max="1000" value="500" data-sizing="px">
+
+                <label for="height">Height:</label>
+                <input type="range" name="height" min="10" max="600" value="350" data-sizing="px">
+
+                <label for="base">Base Color</label>
+                <input type="color" name="base" value="#ffc600">
+            </div>
           </div>
         </div>
       </div>
     </section>
-
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <p>Copyright &copy; 2016, All Rights Reserved</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-    
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

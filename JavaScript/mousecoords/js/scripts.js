@@ -16,7 +16,7 @@ var findUtilities = function (){
                 inputbox = textElements[i];
             }
         }
-        return inputBox;
+        return inputbox;
     }
 
     return {

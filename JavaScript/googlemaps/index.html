@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Google Maps and API</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand em-text" href="index.html">Maps</a>
+        </div>
+      </div>
+    </nav>
+
+    <section id="title-bar">
+    </section>
+
+    <section id="about"> 
+      <div class="container" style="margin-left: 30px;">
+        <div class="row">
+          <div class="col-md-8">
+            <input id="inputField" class="controls" type="text" placeholder="Enter a location">
+              <div id="map"></div>
+          </div>
+          <div class="col-md-4">
+            <button type="button" data-bind="click: addPlace" class="btn btn-success">Save</button>
+            <!--<button type="button" data-bind="click: removePlace" class="btn btn-warning">Remove</button>-->
+            <h1>Address List</h1>
+            <table id="addressTable" class="table table-striped">
+              <thread>
+                <tr class="header">
+                  <th style="width:10%;">Choose</th>
+                  <th style="text-align:center">Address</th>
+                  <th style="text-align:center;width:10%;">Visible</th>
+                </tr>
+              </thread>
+              <tbody data-bind="foreach: places">
+                <td><input type="checkbox" data-bind=""></td>
+                <td data-bind="text: adress"></td>
+                <td><input type="checkbox" data-bind=""></td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <p>Copyright &copy; 2016, All Rights Reserved</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXrYMXNP52UuHb-jDXr_Uy2RxUhcAIo4c&libraries=places&signed_in=true&callback=initMap" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../knockoutJS/knockout-min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
